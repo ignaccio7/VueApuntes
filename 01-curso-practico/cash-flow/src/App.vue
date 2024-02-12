@@ -3,7 +3,7 @@
   import { defineAsyncComponent } from 'vue';
 
   const HomePage = defineAsyncComponent(()=>{
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve)=>{
       setTimeout(()=>{
         resolve(import('@/components/Home.vue'))
       },2000)
