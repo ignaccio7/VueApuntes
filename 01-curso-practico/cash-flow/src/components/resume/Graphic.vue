@@ -82,13 +82,14 @@ const tap = (event) => {
   // console.log("Touch en la pantalla ",touchX)
   // ahora para que nos de el valor en escala del svg multiplicamos por 300 porque es el ancho de la grafica y dividimos por el ancho del elemento
   // nota: el ancho del elemento en getBoundingClient no es exactamente 300 ya que este ancho toma medidas como puede ser el scroll bar margenes rellenos etc
+  // multiplicamos por 300 para que vaya de 0 a 300 y dividimos por el ancho del elemento obtenido por el getBoundingClientReact para que sea esa escala y luego posicionamos ese punto en la linea
   pointerLine.value = ((touchX - elementX) * 300) / elementWidth
 }
 </script>
 
 <template>
   <div class="graphic">
-    {{ pointerLine }}
+    <!-- {{ pointerLine }} -->
     <!--inicia en 0 0 y tiene 300 de ancho y 200 final-->
     <svg viewBox="0 0 300 200" @touchstart="tap" v-on:touchmove="tap" @touchend="untap">
       <!--Esta seria la linea central gris en medio del grafico -> usamos la funcion computada para mostrar el valor en el eje y en el que tengamos 0 Bs -->

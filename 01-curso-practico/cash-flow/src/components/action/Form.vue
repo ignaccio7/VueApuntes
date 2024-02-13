@@ -6,16 +6,29 @@ import IconCoins from '../icons/IconCoins.vue';
 
 const showModal = defineModel()
 
-const movement = reactive({
+const defaultMovement = {
   title: '',
   amount: '',
   description: '',
   movementType: 'Ingreso'
+}
+
+const movement = reactive({
+  ...defaultMovement
 })
+
+const emit = defineEmits(['create'])
 
 const handleForm = (event) => {
   event.preventDefault()
   showModal.value = false
+  emit('create',{
+    ...movement,
+    amount: movement.movementType === 'Ingreso' ? movement.amount : -movement.amount,
+    time: new Date(),
+    id: crypto.randomUUID()
+  })
+  Object.assign(movement, defaultMovement)
 }
 
 </script>
@@ -24,11 +37,11 @@ const handleForm = (event) => {
   <form @submit="handleForm">
     <label class="field">
       Titulo:
-      <input type="text" v-model="movement.title" placeholder="Compra, Deposito, Retiro, ..." autofocus>
+      <input type="text" v-model="movement.title" placeholder="Compra, Deposito, Retiro, ..." autofocus required>
     </label>
     <label class="field">
       Monto:
-      <input type="number" v-model="movement.amount" placeholder="..., 1000, 500, 200, 100">
+      <input type="number" v-model="movement.amount" placeholder="..., 1000, 500, 200, 100" required>
     </label>
     <label class="field">
       Descripcion:

@@ -12,6 +12,12 @@ const handleModal = () => {
   showModal.value = !showModal.value
 }
 
+const emit = defineEmits(['createMovement'])
+
+const create = (movement) => {  
+  emit('createMovement',movement)
+}
+
 </script>
 
 <template>
@@ -22,7 +28,7 @@ const handleModal = () => {
   <teleport to="#app">
     <Modal v-show="showModal" @close="showModal = false">
       <!-- Aqui ira el formulario para agregar -->
-      <Form v-model="showModal" />
+      <Form v-model="showModal" @create="create"/>
     </Modal>
   </teleport>
 </template>

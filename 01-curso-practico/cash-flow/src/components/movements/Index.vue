@@ -12,9 +12,17 @@ const props = defineProps({
 
 const { movements } = toRefs(props)
 
+const emit = defineEmits(['remove'])
+
 const removeMovement = (id) => {
-  console.log("eliminar", id);
+  // console.log("eliminar", id);
+  emit('remove',id)
 }
+
+/*onMounted(()=>{
+  console.log('Component Movements');
+  console.log(movements.value);
+})*/
 
 </script>
 

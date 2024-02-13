@@ -16,9 +16,9 @@
 
 <script setup>
 import { currencyFormatter } from '@/helpers/index.js'
-import { computed } from 'vue';
+import { computed, toRefs } from 'vue';
 
-const { label, amount, totalAmount } = defineProps({
+const props = defineProps({
   label: {
     type: String,
     default: 'Total ahorros:'
@@ -31,13 +31,15 @@ const { label, amount, totalAmount } = defineProps({
 })
 // console.log(props);
 
+const { label, amount, totalAmount } = toRefs(props)
+
 
 const visualAmount = computed(() => {
-  return amount ? amount : totalAmount
+  return amount.value ? amount.value : totalAmount.value
 })
 
 const visualLabel = computed(() => {
-  return label ? label : 'Total ahorros:'
+  return label.value ? label.value : 'Total ahorros:'
 })
 
 const amountCurrency = computed(() => {

@@ -7,7 +7,7 @@ import IconTrash from '../icons/IconTrash.vue';
 
 const props = defineProps({
   id: {
-    type: Number,
+    type: String,
     required: true
   },
   title: {
