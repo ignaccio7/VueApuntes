@@ -125,7 +125,7 @@ const save = () => {
 const create = (movement) => {
   // console.log('transmitiendo', movement);
   movements.value.push(movement)
-  console.log(movements);
+  // console.log(movements);
   save()
 }
 
@@ -154,6 +154,12 @@ const totalAmount = computed(()=>{
   return sum
 })
 
+// Para modificar el label del amount cuando lo seleccionen
+const selectAmount = ({amountSelected , index}) => {
+  amount.value = amountSelected
+  label.value = movements.value[index].time.toLocaleDateString()
+}
+
 </script>
 
 <template>
@@ -164,7 +170,7 @@ const totalAmount = computed(()=>{
     <template #resume>
       <Resume :label="label" :amount="amount" :totalAmount="totalAmount">
         <template #graphic>
-          <Graphic :amounts="amounts" />
+          <Graphic :amounts="amounts" @select-amount="selectAmount"/>
         </template>
         <template #action>
           <Action @createMovement="create" />

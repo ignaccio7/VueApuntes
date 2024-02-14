@@ -1,5 +1,5 @@
 <script setup>
-import { computed, toRefs, ref } from 'vue'
+import { computed, toRefs, ref, watch } from 'vue'
 
 const props = defineProps({
   amounts: {
@@ -85,6 +85,19 @@ const tap = (event) => {
   // multiplicamos por 300 para que vaya de 0 a 300 y dividimos por el ancho del elemento obtenido por el getBoundingClientReact para que sea esa escala y luego posicionamos ese punto en la linea
   pointerLine.value = ((touchX - elementX) * 300) / elementWidth
 }
+
+const emit = defineEmits(['selectAmount'])
+
+// watch(pointerLine,(newValue, oldValue) => {
+watch(pointerLine,(newValue) => {
+  // dividimos entre 300 porque es el ancho del svg
+  // y multiplicamos por la longitud de los montos ya que es la division que estamos tomando sobre los 30 ultimos montos que tomamos en cuenta
+  const index = Math.abs(Math.ceil((newValue / 300) * amounts.value.length))
+  if (index <= 0 || index >= amounts.value.length + 1) return
+  const amountLabel = amounts.value[index - 1]
+  emit('selectAmount', { amountSelected: amountLabel, index: index-1})
+})
+
 </script>
 
 <template>
