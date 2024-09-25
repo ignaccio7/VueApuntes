@@ -10,6 +10,15 @@
 				</li>
 			</ul>
 
+			<h2>Chats With Props</h2>
+			<ul>
+				<li v-for="chat in chats" :key="chat.id">
+					<RouterLink :to="`/chats/props/${chat.id}`">
+						{{ chat.name }}
+					</RouterLink>
+				</li>
+			</ul>
+
 			<article>
 				<h2>Mensajes</h2>
 					
