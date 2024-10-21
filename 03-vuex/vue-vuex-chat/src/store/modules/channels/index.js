@@ -12,7 +12,10 @@ const module = {
   },
   getters: {
     getChannels: (state, getters, rootState, rootGetters) => (search) => {
-      return state.channels
+      return state.channels.filter(channel => {
+        return (channel.name.toLowerCase().includes(search.toLowerCase()))
+      })
+      /* state.channels
         .filter(
           (channel) => channel.name
             .toLowerCase()
@@ -23,7 +26,7 @@ const module = {
             ...channel,
             messages
           }
-        })
+        })*/
     }
   }
 }

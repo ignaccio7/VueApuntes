@@ -33,8 +33,8 @@ const store = createStore({
   },
   modules: {
     profile,
-    //channels,
-    //messages,
+    channels,
+    messages,
     //contacts
   }
 })

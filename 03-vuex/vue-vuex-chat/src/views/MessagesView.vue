@@ -18,11 +18,12 @@ export default {
     }
   },
   computed: {
+    /*...mapGetters('contacts', ['getContactById']),*/
     ...mapGetters('messages', ['getMessages']),
-    ...mapGetters('contacts', ['getContactById']),
     messagesView() {
       return this.getMessages(this.channelId)?.map((message) => {
-        const author = this.getContactById(message.author)
+        //const author = this.getContactById(message.author)
+        const author = this.people.find(p => p.id === message.author)
         if (!author) return message;
         return {
           ...message,
@@ -35,8 +36,8 @@ export default {
   watch: {
     '$route.params.id': {
       immediate: true,
-      handler(id) {
-        this.channelId = id
+      handler(newId) {
+        this.channelId = newId
         this.scrollToBottom()
       }
     }
@@ -69,7 +70,7 @@ export default {
       </div>
     </header>
     <div class="content">
-      <MessageItem
+      <MessageItem 
         v-for="message in messagesView"
         :key="message.id"
         :avatar="message.author.avatar"

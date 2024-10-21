@@ -89,7 +89,7 @@ export default {
     <div class="channels">
       <!--v-for="channel in getChannels(search)"-->
       <ChatItem
-        v-for="channel in []"
+        v-for="channel in getChannels(search)"
         :key="channel.id"
         :id="channel.id"
         :name="channel.name"
