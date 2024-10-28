@@ -12,21 +12,25 @@ const module = {
   },
   getters: {
     getChannels: (state, getters, rootState, rootGetters) => (search) => {
-      return state.channels.filter(channel => {
+      /*return state.channels.filter(channel => {
+        
+        Por defecto si a ="abc" entonces a.includes("") es true
+        
         return (channel.name.toLowerCase().includes(search.toLowerCase()))
-      })
-      /* state.channels
+      })*/
+      state.channels
         .filter(
           (channel) => channel.name
             .toLowerCase()
             .includes(search.toLowerCase())
         ).map((channel) => {
+          // Para acceder en este caso a los getters de otro modulo lo hacemos a travez del rootGetters
           const messages = rootGetters['messages/getUnreadMessages'](channel.id);
           return {
             ...channel,
             messages
           }
-        })*/
+      })
     }
   }
 }
